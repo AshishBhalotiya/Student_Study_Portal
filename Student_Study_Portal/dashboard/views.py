@@ -197,7 +197,7 @@ def books(request):
         r = requests.get(url)
         answer = r.json()
         result_list = []
-        for i in range(10):
+        for i in range(min(10, len(answer['items']))):
             result_dict = {
                 'title': answer['items'][i]['volumeInfo']['title'],
                 'subtitle': answer['items'][i]['volumeInfo'].get('subtitle'),
@@ -209,10 +209,10 @@ def books(request):
                 'preview': answer['items'][i]['volumeInfo'].get('previewLink'),
             }
             result_list.append(result_dict)
-            context = {
+        context = {
                 'form': form,
                 'results': result_list,
-            }
+        }
         return render(request, 'dashboard/books.html', context)
     else:
         form = DashboardForm()
