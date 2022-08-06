@@ -1,5 +1,3 @@
-from doctest import Example
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
